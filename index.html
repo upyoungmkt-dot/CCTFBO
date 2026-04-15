@@ -189,13 +189,14 @@
           age: form.value.age,
           source: finalSource,
           experience: form.value.experience,
-          concerns: finalConcerns.join('、'), // 將陣列轉為字串
-          tfboDate: form.value.tfboDate.join('、'), // 將陣列轉為字串
+          concerns: finalConcerns.join('、'),
+          tfboDate: form.value.tfboDate.join('、'),
           tfboTime: form.value.tfboTime,
           activity: form.value.activity
         };
 
         try {
+          // 寫入 Google Sheets
           await fetch(GAS_URL, {
             method: 'POST',
             mode: 'no-cors', 
@@ -203,16 +204,26 @@
             body: JSON.stringify(payload)
           });
 
+          // 處理 LINE 環境下的發話與關閉視窗 (包含 Keep 防呆機制)
           if (liff.isInClient()) {
             const shortCode = userId.value.slice(-4);
-            await liff.sendMessages([
-              {
-                type: 'text',
-                text: `我已填妥 CleanChain 2026 TFBO 活動表單！\n我的查詢編號是：${shortCode}`
-              }
-            ]);
-            liff.closeWindow();
+            try {
+              // 嘗試在當前視窗發送訊息 (如果在 Keep 裡面這行會失敗，但會被 catch 接住)
+              await liff.sendMessages([
+                {
+                  type: 'text',
+                  text: `我已填妥 CleanChain 2026 TFBO 活動表單！\n我的查詢編號是：${shortCode}`
+                }
+              ]);
+            } catch (err) {
+              // 發生錯誤（例如在 Keep 內開啟）時，默默處理掉，給予成功提示
+              console.log("無法在當前環境自動發話", err);
+              alert("表單已成功送出！"); 
+            }
+            // 無論發話有沒有成功，最後都把視窗關閉，保持良好的體驗
+            liff.closeWindow(); 
           } else {
+            // 如果是在電腦版瀏覽器等非 LINE 環境下開啟
             alert("問卷已成功送出！");
           }
         } catch (error) {
