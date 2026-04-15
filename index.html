@@ -26,9 +26,7 @@
 <body>
 
 <div id="app">
-  <div v-if="isLoading" class="loading">
-    系統載入中，請稍後...
-  </div>
+  <div v-if="isLoading" class="loading">系統載入中，請稍後...</div>
   
   <div v-else class="container">
     <h2>CleanChain 2026 TFBO<br>活動表單</h2>
@@ -116,7 +114,7 @@
 
       <div class="footer-note">
         表單填寫完成後，須經業務單位聯繫並完成諮詢流程，確認無誤後，始得正式加入「保證營收計畫」。<br><br>
-        *本問卷僅作為CleanChain潛在夥伴輪廓分析使用，資料將保密處理，不作其他商業用途。
+        *本問卷僅作為CleanChain潛在夥伴輪廓分析使用，資料將保密處理。
       </div>
 
       <button type="submit" :disabled="isSubmitting || form.concerns.length === 0 || form.tfboDate.length === 0">
@@ -134,20 +132,11 @@
       const isLoading = ref(true);
       const isSubmitting = ref(false);
       const userId = ref('');
+      const lineName = ref('');
       
       const form = ref({
-        name: '',
-        phone: '',
-        city: '',
-        age: '',
-        source: '',
-        sourceOther: '',
-        experience: '',
-        concerns: [],
-        concernsOther: '',
-        tfboDate: [],
-        tfboTime: '',
-        activity: ''
+        name: '', phone: '', city: '', age: '', source: '', sourceOther: '',
+        experience: '', concerns: [], concernsOther: '', tfboDate: [], tfboTime: '', activity: ''
       });
 
       const MY_LIFF_ID = "2009803488-gHtMXHzf";
@@ -159,6 +148,7 @@
           if (liff.isLoggedIn()) {
             const profile = await liff.getProfile();
             userId.value = profile.userId;
+            lineName.value = profile.displayName; // 自動抓取 LINE 顯示名稱
             isLoading.value = false;
           } else {
             liff.login();
@@ -172,9 +162,7 @@
       const submitForm = async () => {
         isSubmitting.value = true;
         
-        // 整理「其他」的自填文字
         let finalSource = form.value.source === '其他' ? `其他: ${form.value.sourceOther}` : form.value.source;
-        
         let finalConcerns = [...form.value.concerns];
         if (finalConcerns.includes('其他')) {
           const index = finalConcerns.indexOf('其他');
@@ -183,6 +171,7 @@
 
         const payload = {
           userId: userId.value,
+          lineName: lineName.value, // 傳送自動抓取的 LINE 名稱
           name: form.value.name,
           phone: form.value.phone,
           city: form.value.city,
@@ -196,7 +185,6 @@
         };
 
         try {
-          // 寫入 Google Sheets
           await fetch(GAS_URL, {
             method: 'POST',
             mode: 'no-cors', 
@@ -204,11 +192,9 @@
             body: JSON.stringify(payload)
           });
 
-          // 處理 LINE 環境下的發話與關閉視窗 (包含 Keep 防呆機制)
           if (liff.isInClient()) {
             const shortCode = userId.value.slice(-4);
             try {
-              // 嘗試在當前視窗發送訊息 (如果在 Keep 裡面這行會失敗，但會被 catch 接住)
               await liff.sendMessages([
                 {
                   type: 'text',
@@ -216,14 +202,11 @@
                 }
               ]);
             } catch (err) {
-              // 發生錯誤（例如在 Keep 內開啟）時，默默處理掉，給予成功提示
-              console.log("無法在當前環境自動發話", err);
+              console.log("不支援自動發話環境", err);
               alert("表單已成功送出！"); 
             }
-            // 無論發話有沒有成功，最後都把視窗關閉，保持良好的體驗
             liff.closeWindow(); 
           } else {
-            // 如果是在電腦版瀏覽器等非 LINE 環境下開啟
             alert("問卷已成功送出！");
           }
         } catch (error) {
