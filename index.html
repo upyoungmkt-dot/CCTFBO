@@ -1,124 +1,232 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="th">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>CleanChain 2026 TFBO 活動表單</title>
+  <title>แบบฟอร์มกิจกรรม CleanChain 2026 TFBO</title>
+  <!-- 引入泰文適用且現代的字體 Prompt -->
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <style>
-    body { font-family: 'Helvetica Neue', Arial, sans-serif; padding: 15px; background-color: #f4f6f9; color: #333; line-height: 1.6; }
-    .container { max-width: 500px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-    h2 { text-align: center; color: #004d99; margin-bottom: 20px; font-size: 22px;}
-    .form-group { margin-bottom: 20px; }
-    label { font-weight: bold; display: block; margin-bottom: 8px; font-size: 15px;}
-    input[type="text"], input[type="tel"] { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 16px; }
-    .radio-group, .checkbox-group { display: flex; flex-direction: column; gap: 10px; }
-    .radio-group label, .checkbox-group label { font-weight: normal; display: flex; align-items: center; font-size: 15px; cursor: pointer; }
-    input[type="radio"], input[type="checkbox"] { margin-right: 10px; width: 18px; height: 18px; }
-    .other-input { margin-top: 5px; padding: 8px; width: 90%; border: 1px dashed #aaa; border-radius: 4px; }
-    .footer-note { font-size: 12px; color: #888; text-align: justify; margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px; }
-    button { background-color: #004d99; color: white; border: none; padding: 15px; width: 100%; font-size: 18px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 10px; transition: background 0.3s; }
-    button:disabled { background-color: #a6c8e6; cursor: not-allowed; }
-    .loading { text-align: center; color: #666; margin-top: 50px; font-size: 18px; }
+    body { 
+      font-family: 'Prompt', 'Helvetica Neue', Arial, sans-serif; 
+      padding: 15px; 
+      background-color: #f4f7fa; 
+      color: #333; 
+      line-height: 1.6; 
+    }
+    .container { 
+      max-width: 500px; 
+      margin: 0 auto; 
+      background: #ffffff; 
+      padding: 30px 25px; 
+      border-radius: 16px; 
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06); 
+    }
+    h2 { 
+      text-align: center; 
+      color: #004d99; 
+      margin-bottom: 24px; 
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    .form-group { 
+      margin-bottom: 22px; 
+    }
+    label { 
+      font-weight: 500; 
+      display: block; 
+      margin-bottom: 10px; 
+      font-size: 15px;
+      color: #2c3e50;
+    }
+    input[type="text"], input[type="tel"] { 
+      width: 100%; 
+      padding: 14px 16px; 
+      border: 1.5px solid #dce1e6; 
+      border-radius: 8px; 
+      box-sizing: border-box; 
+      font-size: 15px; 
+      font-family: 'Prompt', sans-serif;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    input[type="text"]:focus, input[type="tel"]:focus {
+      outline: none;
+      border-color: #004d99;
+      box-shadow: 0 0 0 3px rgba(0, 77, 153, 0.1);
+    }
+    .radio-group, .checkbox-group { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 12px; 
+      background: #fdfdfd;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #f0f0f0;
+    }
+    .radio-group label, .checkbox-group label { 
+      font-weight: 400; 
+      display: flex; 
+      align-items: flex-start; 
+      font-size: 15px; 
+      cursor: pointer; 
+      margin-bottom: 0;
+      color: #4a5568;
+    }
+    input[type="radio"], input[type="checkbox"] { 
+      margin-right: 12px; 
+      margin-top: 3px;
+      width: 20px; 
+      height: 20px; 
+      accent-color: #004d99;
+      flex-shrink: 0;
+    }
+    .other-input { 
+      margin-top: 8px; 
+      padding: 12px 16px; 
+      width: 100%; 
+      border: 1px dashed #b0c4de; 
+      border-radius: 6px; 
+      font-family: 'Prompt', sans-serif;
+    }
+    .footer-note { 
+      font-size: 13px; 
+      color: #718096; 
+      text-align: justify; 
+      margin-top: 25px; 
+      border-top: 1px solid #e2e8f0; 
+      padding-top: 20px; 
+      line-height: 1.7;
+    }
+    button { 
+      background-color: #004d99; 
+      color: white; 
+      border: none; 
+      padding: 16px; 
+      width: 100%; 
+      font-size: 16px; 
+      font-weight: 600; 
+      font-family: 'Prompt', sans-serif;
+      border-radius: 10px; 
+      cursor: pointer; 
+      margin-top: 15px; 
+      transition: background 0.3s, transform 0.1s; 
+    }
+    button:active {
+      transform: scale(0.98);
+    }
+    button:disabled { 
+      background-color: #a6c8e6; 
+      cursor: not-allowed; 
+      transform: none;
+    }
+    .loading { 
+      text-align: center; 
+      color: #004d99; 
+      margin-top: 60px; 
+      font-size: 18px; 
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
 
 <div id="app">
-  <div v-if="isLoading" class="loading">系統載入中，請稍後...</div>
+  <div v-if="isLoading" class="loading">ระบบกำลังโหลด กรุณารอสักครู่...</div>
   
   <div v-else class="container">
-    <h2>CleanChain 2026 TFBO<br>活動表單</h2>
+    <h2>แบบฟอร์มกิจกรรม<br>CleanChain 2026 TFBO</h2>
     
     <form @submit.prevent="submitForm">
       <div class="form-group">
-        <label>姓名：</label>
-        <input type="text" v-model="form.name" required placeholder="請輸入姓名">
+        <label>ชื่อ-นามสกุล：</label>
+        <input type="text" v-model="form.name" required placeholder="โปรดระบุชื่อ-นามสกุล">
       </div>
       
       <div class="form-group">
-        <label>手機：</label>
-        <input type="tel" v-model="form.phone" required placeholder="請輸入手機號碼">
+        <label>เบอร์มือถือ：</label>
+        <input type="tel" v-model="form.phone" required placeholder="โปรดระบุเบอร์มือถือ">
       </div>
 
       <div class="form-group">
-        <label>City (城市)：</label>
-        <input type="text" v-model="form.city" required placeholder="請輸入城市">
+        <label>เมือง (City)：</label>
+        <input type="text" v-model="form.city" required placeholder="โปรดระบุเมือง">
       </div>
 
       <div class="form-group">
-        <label>您的年齡區間為：</label>
+        <label>ช่วงอายุ :</label>
         <div class="radio-group">
-          <label v-for="option in ['20–29歲', '30–39歲', '40–49歲', '50–59歲', '60歲以上']" :key="option">
+          <label v-for="option in ['20–29 ปี', '30–39 ปี', '40–49 ปี', '50–59 ปี', '60 ปีขึ้นไป']" :key="option">
             <input type="radio" v-model="form.age" :value="option" required> {{ option }}
           </label>
         </div>
       </div>
 
       <div class="form-group">
-        <label>您從哪裡得知CleanChain?</label>
+        <label>รู้จัก CleanChain จากช่องทางใด?</label>
         <div class="radio-group">
-          <label v-for="option in ['Facebook', 'Instagram', 'Line', '業務推薦', '朋友推薦', '其他']" :key="option">
+          <label v-for="option in ['Facebook', 'Instagram', 'Line', 'พนักงานขายแนะนำ', 'เพื่อนแนะนำ', 'อื่นๆ']" :key="option">
             <input type="radio" v-model="form.source" :value="option" required> {{ option }}
           </label>
-          <input v-if="form.source === '其他'" type="text" v-model="form.sourceOther" class="other-input" placeholder="請註明得知管道" required>
+          <input v-if="form.source === 'อื่นๆ'" type="text" v-model="form.sourceOther" class="other-input" placeholder="โปรดระบุช่องทาง" required>
         </div>
       </div>
 
       <div class="form-group">
-        <label>您是否有開過洗衣店、有自己的店面?</label>
+        <label>คุณเคยเปิดร้านซักรีดหรือมีหน้าร้านเป็นของตัวเองหรือไม่?</label>
         <div class="radio-group">
-          <label v-for="option in ['有開過洗衣店，有自己的店面', '有開過洗衣店，沒有自己的店面', '沒開過洗衣店，有自己的店面', '沒開過洗衣店，沒有自己的店面']" :key="option">
+          <label v-for="option in ['เคยเปิดร้านซักรีด และมีหน้าร้านเป็นของตัวเอง', 'เคยเปิดร้านซักรีด แต่ไม่มีหน้าร้านเป็นของตัวเอง', 'ไม่เคยเปิดร้านซักรีด แต่มีหน้าร้านเป็นของตัวเอง', 'ไม่เคยเปิดร้านซักรีด และไม่มีหน้าร้านเป็นของตัวเอง']" :key="option">
             <input type="radio" v-model="form.experience" :value="option" required> {{ option }}
           </label>
         </div>
       </div>
 
       <div class="form-group">
-        <label>您在評估開店時，最在意的因素是？（可複選）</label>
+        <label>ปัจจัยใดที่คุณให้ความสำคัญมากที่สุดเมื่อประเมินการเปิดร้าน? (เลือกได้มากกว่า 1 ข้อ)</label>
         <div class="checkbox-group">
-          <label v-for="option in ['初期創業成本', '回本時間長短', '展店與營運難易度', '設備維修與保固成本', '總部支援與行銷協助', '其他']" :key="option">
+          <label v-for="option in ['ต้นทุนการเริ่มต้นธุรกิจ', 'ระยะเวลาในการคืนทุน', 'ความยากง่ายในการเปิดร้านและการดำเนินงาน', 'ค่าซ่อมบำรุงและค่ารับประกันอุปกรณ์', 'สนับสนุนครบ พร้อมช่วยด้านการตลาดอย่างต่อเนื่อง', 'อื่นๆ']" :key="option">
             <input type="checkbox" v-model="form.concerns" :value="option"> {{ option }}
           </label>
-          <input v-if="form.concerns.includes('其他')" type="text" v-model="form.concernsOther" class="other-input" placeholder="請註明其他因素" required>
+          <input v-if="form.concerns.includes('อื่นๆ')" type="text" v-model="form.concernsOther" class="other-input" placeholder="โปรดระบุปัจจัยอื่นๆ" required>
         </div>
       </div>
 
       <div class="form-group">
-        <label>6/4-6/7 TFBO 預計哪一天來參加? （可複選）</label>
+        <label>คุณวางแผนจะเข้าร่วมงาน TFBO ในวันใด? (เลือกได้มากกว่า 1 ข้อ)</label>
         <div class="checkbox-group">
-          <label v-for="option in ['4 June', '5 June', '6 June', '7 June', '不會參加TFBO']" :key="option">
+          <label v-for="option in ['4 มิ.ย. 69', '5 มิ.ย. 69', '6 มิ.ย. 69', '7 มิ.ย. 69', 'ไม่เข้าร่วมงาน TFBO']" :key="option">
             <input type="checkbox" v-model="form.tfboDate" :value="option"> {{ option }}
           </label>
         </div>
       </div>
 
       <div class="form-group">
-        <label>TFBO 預計甚麼時候來G4攤位?</label>
+        <label>คุณวางแผนจะมาที่บูธ G4 ในงาน TFBO เวลาใด? (พนักงานขายจะนัดหมายเวลากับคุณอีกครั้ง)</label>
         <div class="radio-group">
-          <label v-for="option in ['10:00-12:00', '12:00-14:00', '14:00-16:00', '16:00-18:00', '不會參加TFBO']" :key="option">
+          <label v-for="option in ['10:00-12:00', '12:00-14:00', '14:00-16:00', '16:00-18:00', 'ไม่เข้าร่วมงาน TFBO']" :key="option">
             <input type="radio" v-model="form.tfboTime" :value="option" required> {{ option }}
           </label>
         </div>
       </div>
 
       <div class="form-group">
-        <label>想參加哪個活動?</label>
+        <label>คุณต้องการเข้าร่วมกิจกรรมใด?</label>
         <div class="radio-group">
-          <label v-for="option in ['保證營收計畫', '1元競標活動', '都想參加', '只想了解產品與服務']" :key="option">
+          <label v-for="option in ['แผนการรับประกันรายได้', 'กิจกรรมการประมูล 1 บาท', 'ต้องการเข้าร่วมทั้งสองกิจกรรม', 'ต้องการทราบข้อมูลผลิตภัณฑ์และบริการเท่านั้น']" :key="option">
             <input type="radio" v-model="form.activity" :value="option" required> {{ option }}
           </label>
         </div>
       </div>
 
       <div class="footer-note">
-        表單填寫完成後，須經業務單位聯繫並完成諮詢流程，確認無誤後，始得正式加入「保證營收計畫」。<br><br>
-        *本問卷僅作為CleanChain潛在夥伴輪廓分析使用，資料將保密處理。
+        หลังจากกรอกแบบฟอร์มเสร็จสิ้น จะต้องได้รับการติดต่อจากฝ่ายขายและผ่านขั้นตอนการให้คำปรึกษา เมื่อยืนยันความถูกต้องแล้ว จึงจะสามารถเข้าร่วม "แผนการรับประกันรายได้" อย่างเป็นทางการ<br><br>
+        *แบบสอบถามนี้ใช้สำหรับการวิเคราะห์ข้อมูลเบื้องต้นของว่าที่พันธมิตร CleanChain เท่านั้น ข้อมูลของคุณจะถูกเก็บเป็นความลับ และจะไม่นำไปใช้เพื่อวัตถุประสงค์ทางการค้าอื่นๆ
       </div>
 
       <button type="submit" :disabled="isSubmitting || form.concerns.length === 0 || form.tfboDate.length === 0">
-        {{ isSubmitting ? '資料傳送中...' : '確認送出表單' }}
+        {{ isSubmitting ? 'กำลังส่งข้อมูล...' : 'ยืนยันการส่งแบบฟอร์ม' }}
       </button>
     </form>
   </div>
@@ -148,31 +256,31 @@
           if (liff.isLoggedIn()) {
             const profile = await liff.getProfile();
             userId.value = profile.userId;
-            // 確保確實抓到 displayName 並存入 lineName 變數
-            lineName.value = profile.displayName || '未提供名稱'; 
+            lineName.value = profile.displayName || 'ไม่ระบุชื่อ'; 
             isLoading.value = false;
           } else {
             liff.login();
           }
         } catch (err) {
           console.error("LIFF 初始化失敗", err);
-          alert("請在 LINE App 內開啟此連結");
+          alert("โปรดเปิดลิงก์นี้ในแอปพลิเคชัน LINE");
         }
       });
 
       const submitForm = async () => {
         isSubmitting.value = true;
         
-        let finalSource = form.value.source === '其他' ? `其他: ${form.value.sourceOther}` : form.value.source;
+        // 判斷邏輯調整為泰文的 "อื่นๆ"
+        let finalSource = form.value.source === 'อื่นๆ' ? `อื่นๆ: ${form.value.sourceOther}` : form.value.source;
         let finalConcerns = [...form.value.concerns];
-        if (finalConcerns.includes('其他')) {
-          const index = finalConcerns.indexOf('其他');
-          finalConcerns[index] = `其他: ${form.value.concernsOther}`;
+        if (finalConcerns.includes('อื่นๆ')) {
+          const index = finalConcerns.indexOf('อื่นๆ');
+          finalConcerns[index] = `อื่นๆ: ${form.value.concernsOther}`;
         }
 
         const payload = {
           userId: userId.value,
-          lineName: lineName.value, // 這裡將名稱打包進 payload
+          lineName: lineName.value,
           name: form.value.name,
           phone: form.value.phone,
           city: form.value.city,
@@ -199,20 +307,20 @@
               await liff.sendMessages([
                 {
                   type: 'text',
-                  text: `我已填妥 CleanChain 2026 TFBO 活動表單！\n我的查詢編號是：${shortCode}`
+                  text: `ฉันได้กรอกแบบฟอร์มกิจกรรม CleanChain 2026 TFBO เรียบร้อยแล้ว!\nหมายเลขสอบถามของฉันคือ：${shortCode}`
                 }
               ]);
             } catch (err) {
-              console.log("不支援自動發話環境", err);
-              alert("表單已成功送出！"); 
+              console.log("ไม่รองรับสภาพแวดล้อมการส่งข้อความอัตโนมัติ", err);
+              alert("ส่งแบบฟอร์มสำเร็จ!"); 
             }
             liff.closeWindow(); 
           } else {
-            alert("問卷已成功送出！");
+            alert("ส่งแบบฟอร์มสำเร็จ!");
           }
         } catch (error) {
           console.error("送出失敗", error);
-          alert("傳送失敗，請確認網路連線。");
+          alert("ส่งข้อมูลล้มเหลว โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ต");
         } finally {
           isSubmitting.value = false;
         }
