@@ -270,7 +270,6 @@
       const submitForm = async () => {
         isSubmitting.value = true;
         
-        // 判斷邏輯調整為泰文的 "อื่นๆ"
         let finalSource = form.value.source === 'อื่นๆ' ? `อื่นๆ: ${form.value.sourceOther}` : form.value.source;
         let finalConcerns = [...form.value.concerns];
         if (finalConcerns.includes('อื่นๆ')) {
