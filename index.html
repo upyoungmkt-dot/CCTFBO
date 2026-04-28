@@ -129,6 +129,44 @@
       font-size: 18px; 
       font-weight: 500;
     }
+    /* 新增活動說明區塊樣式 */
+    .activity-info {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    @media (min-width: 600px) {
+      .activity-info {
+        flex-direction: row;
+      }
+    }
+    .info-card {
+      flex: 1;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 15px;
+    }
+    .info-card h3 {
+      font-size: 14px;
+      color: #004d99;
+      margin-top: 0;
+      margin-bottom: 12px;
+      border-bottom: 1px dashed #cbd5e1;
+      padding-bottom: 8px;
+      font-weight: 600;
+    }
+    .info-card ol {
+      margin: 0;
+      padding-left: 22px;
+      font-size: 13px;
+      color: #4a5568;
+      line-height: 1.6;
+    }
+    .info-card li {
+      margin-bottom: 6px;
+    }
   </style>
 </head>
 <body>
@@ -139,6 +177,28 @@
   <div v-else class="container">
     <h2>แบบฟอร์มกิจกรรม<br>CleanChain 2026 TFBO</h2>
     
+    <!-- 新增活動說明區塊 -->
+    <div class="activity-info">
+      <div class="info-card">
+        <h3>แผนการรับประกันรายได้ ขั้นตอนการเข้าร่วม</h3>
+        <ol>
+          <li>กรอก "แบบฟอร์มกิจกรรม CleanChain 2026 TFBO"</li>
+          <li>ฝ่ายขาย CleanChain ติดต่อเพื่อให้คำปรึกษา</li>
+          <li>ประเมินผลตอบแทนการลงทุนและกำหนดเป้าหมายรายได้โดยประมาณ</li>
+          <li>หากผลประกอบการไม่เป็นไปตามเป้าหมายรายได้ที่กำหนด สำนักงานใหญ่มีนโยบายรับซื้ออุปกรณ์คืนตามเงื่อนไขของบริษัท</li>
+        </ol>
+      </div>
+      <div class="info-card">
+        <h3>กิจกรรมการประมูล 1 บาท ขั้นตอนการเข้าร่วม</h3>
+        <ol>
+          <li>กรอก "แบบฟอร์มกิจกรรม CleanChain 2026 TFBO"</li>
+          <li>หลังจากกรอกเสร็จสิ้น โปรดติดต่อเจ้าหน้าที่หน้างาน TFBO เพื่อรับหลักฐานแสดงสิทธิ์</li>
+          <li>ไปที่บูธ G4 ก่อนเริ่มกิจกรรมการประมูล 5 นาที</li>
+          <li>เริ่มเข้าร่วมการประมูล 1 บาท</li>
+        </ol>
+      </div>
+    </div>
+
     <form @submit.prevent="submitForm">
       <div class="form-group">
         <label>ชื่อ-นามสกุล：</label>
