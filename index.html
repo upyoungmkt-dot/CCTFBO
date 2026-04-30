@@ -30,7 +30,7 @@
     .hero {
       background: linear-gradient(170deg, #082d54 0%, #1060aa 50%, #2590d8 100%);
       position: relative;
-      padding: 40px 20px 130px;
+      padding: 40px 20px 80px;
       text-align: center;
       overflow: hidden;
     }
@@ -78,13 +78,12 @@
       font-size: 11.5px; color: rgba(255,255,255,0.75);
       font-weight: 300; letter-spacing: 0.06em;
       position: relative; z-index: 2;
-      margin-bottom: 8px;
     }
 
     /* ── Mascot centered at bottom ── */
     .mascot-stage {
       position: absolute;
-      bottom: -80px;
+      bottom: -140px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 10;
@@ -93,7 +92,7 @@
       justify-content: center;
     }
     .mascot-img {
-      width: 150px; height: 150px;
+      width: 160px; height: 160px;
       object-fit: contain;
       display: block;
       
@@ -142,7 +141,7 @@
       to   { opacity:1; transform:translateY(0); }
     }
 
-    .card-mascot-space { height: 90px; }
+    .card-mascot-space { height: 160px; }
 
     /* Info */
     .info-wrap {
@@ -540,10 +539,10 @@
               </div>
             </div>
             <div class="fg">
-              <label class="fl">วางแผนมาที่บูธ G4 เวลาใด? <span class="fl-note">(พนักงานขายจะนัดหมายอีกครั้ง)</span></label>
+              <label class="fl">วางแผนมาที่บูธ G4 เวลาใด? <span class="fl-note">(เลือกได้มากกว่า 1 ช่วงเวลา)</span></label>
               <div class="choices">
-                <div class="ci" v-for="o in ['10:00-12:00','12:00-14:00','14:00-16:00','16:00-18:00','ไม่เข้าร่วมงาน TFBO']" :key="o">
-                  <input type="radio" v-model="form.tfboTime" :value="o" :id="'t'+o" required>
+                <div class="ci cb" v-for="o in ['10:00-12:00','12:00-14:00','14:00-16:00','16:00-18:00','ไม่เข้าร่วมงาน TFBO']" :key="o">
+                  <input type="checkbox" v-model="form.tfboTime" :value="o" :id="'t'+o">
                   <label :for="'t'+o">{{ o }}</label>
                 </div>
               </div>
@@ -563,7 +562,7 @@
               * แบบสอบถามนี้ใช้สำหรับการวิเคราะห์ข้อมูลเบื้องต้นเท่านั้น ข้อมูลของคุณจะถูกเก็บเป็นความลับ
             </div>
 
-            <button class="submit-btn" type="submit" :disabled="isSubmitting || form.concerns.length===0 || form.tfboDate.length===0">
+            <button class="submit-btn" type="submit" :disabled="isSubmitting || form.concerns.length===0 || form.tfboDate.length===0 || form.tfboTime.length===0">
               <svg v-if="!isSubmitting" width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M2 8h12M10 4l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -587,7 +586,7 @@
       const lineName = ref('');
       const form = ref({
         name:'', phone:'', city:'', age:'', source:'', sourceOther:'',
-        experience:'', concerns:[], concernsOther:'', tfboDate:[], tfboTime:'', activity:''
+        experience:'', concerns:[], concernsOther:'', tfboDate:[], tfboTime:[], activity:''
       });
       const MY_LIFF_ID = "2009803488-gHtMXHzf";
       const GAS_URL = "https://script.google.com/macros/s/AKfycbxZOmfFXVpA7djNwjETI3DaRjA3tz9D7eHgectFcx_9Totc_WAnLJUm44oIScg-xrr0/exec";
@@ -616,7 +615,7 @@
           name: form.value.name, phone: form.value.phone, city: form.value.city,
           age: form.value.age, source: src, experience: form.value.experience,
           concerns: con.join('、'), tfboDate: form.value.tfboDate.join('、'),
-          tfboTime: form.value.tfboTime, activity: form.value.activity
+          tfboTime: form.value.tfboTime.join('、'), activity: form.value.activity
         };
         try {
           await fetch(GAS_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
