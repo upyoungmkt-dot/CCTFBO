@@ -617,13 +617,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           if (liff.isInClient()) {
             var code = userId.value.slice(-4);
             try {
-              await liff.sendMessages([{type:'text', text: 'ฉันได้กรอกแบบฟอร์มกิจกรรม CleanChain 2026 TFBO เรียบร้อยแล้ว!\nหมายเลขสอบถามของฉันคือ：' + code +
-  '\n\n◆ แผนการรับประกันรายได้' +
-  '\nรายละเอียดเพิ่มเติม สอบถามได้ที่บูธ' +
-  '\n\n◆ กิจกรรมประมูลเริ่มต้น 1 บาท' +
-  '\nวันที่ 6 มิถุนายน (วันเสาร์) เวลา 16:30-16:50 การประมูลเครื่องซักรองเท้า 1 บาท' +
-  '\nวันที่ 7 มิถุนายน (วันอาทิตย์) เวลา 13:30-13:50 การประมูลเครื่องซักผ้า AQUA all in one 17 กก. 1 บาท'
-}]);
+              await liff.sendMessages([{type:'text', text: 'ฉันได้กรอกแบบฟอร์มกิจกรรม CleanChain 2026 TFBO เรียบร้อยแล้ว!\nหมายเลขสอบถามของฉันคือ：' + code +}]);
             } catch(e2) { alert("ส่งแบบฟอร์มสำเร็จ!"); }
             liff.closeWindow();
           } else { alert("ส่งแบบฟอร์มสำเร็จ!"); }
