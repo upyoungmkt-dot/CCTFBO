@@ -613,47 +613,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           tfboTime: form.value.tfboTime.join ? form.value.tfboTime.join('、') : form.value.tfboTime, activity: form.value.activity
         };
         try {
-  await fetch(GAS_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  });
-
-  if (liff.isInClient()) {
-    var code = userId.value.slice(-4);
-
-    try {
-      await liff.sendMessages([{
-        type: 'text',
-        text: `ฉันได้กรอกแบบฟอร์มกิจกรรม CleanChain 2026 TFBO เรียบร้อยแล้ว!
-หมายเลขสอบถามของฉันคือ：${code}
-
-◆ แผนการรับประกันรายได้
-รายละเอียดเพิ่มเติม สอบถามได้ที่บูธ
-
-◆ กิจกรรมประมูลเริ่มต้น 1 บาท
-ไปที่บูธ G4 ก่อนเริ่มกิจกรรม 15 นาที
-
-วันที่ 6 มิถุนายน (วันเสาร์) เวลา 16:30-16:50
-การประมูลเครื่องซักรองเท้า 1 บาท
-
-วันที่ 7 มิถุนายน (วันอาทิตย์) เวลา 13:30-13:50
-การประมูลเครื่องซักผ้า AQUA All-in-One 17 กก. 1 บาท`
-      }]);
-    } catch (e2) {
-      alert("ส่งแบบฟอร์มสำเร็จ!");
-    }
-
-    liff.closeWindow();
-  } else {
-    alert("ส่งแบบฟอร์มสำเร็จ!");
-  }
-} catch (e) {
-  alert("ส่งข้อมูลล้มเหลว โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ต");
-} finally {
-  isSubmitting.value = false;
-}
+          await fetch(GAS_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+          if (liff.isInClient()) {
+            var code = userId.value.slice(-4);
+            try {
+              await liff.sendMessages([{type:'text', text:'ฉันได้กรอกแบบฟอร์มกิจกรรม CleanChain 2026 TFBO เรียบร้อยแล้ว!\nหมายเลขสอบถามของฉันคือ：'+code}]);
+            } catch(e2) { alert("ส่งแบบฟอร์มสำเร็จ!"); }
+            liff.closeWindow();
+          } else { alert("ส่งแบบฟอร์มสำเร็จ!"); }
+        } catch(e) { alert("ส่งข้อมูลล้มเหลว โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ต"); }
+        finally { isSubmitting.value = false; }
+      };
+      return { isLoading, isSubmitting, form, submitForm };
     }
   }).mount('#app');
 </script>
