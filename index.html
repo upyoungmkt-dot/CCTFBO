@@ -487,7 +487,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="fg">
               <label class="fl">รู้จัก CleanChain จากช่องทางใด?</label>
               <div class="choices">
-                <div class="ci" v-for="o in ['Facebook','Instagram','Line','พนักงานขายแนะนำ','เพื่อนแนะนำ','อื่นๆ']" :key="o">
+                <div class="ci" v-for="o in ['Facebook','Instagram','Line','พบในงาน TFBO','พนักงานขายแนะนำ','เพื่อนแนะนำ','อื่นๆ']" :key="o">
                   <input type="radio" v-model="form.source" :value="o" :id="'s'+o" required>
                   <label :for="'s'+o">{{ o }}</label>
                 </div>
