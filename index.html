@@ -536,7 +536,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="fg">
               <label class="fl">วางแผนมาที่บูธ G4 เวลาใด? <span class="fl-note">(เลือกได้มากกว่า 1 ช่วงเวลา)</span></label>
               <div class="choices">
-                <div class="ci cb" v-for="o in ['10:00-12:00','12:00-14:00','14:00-16:00','16:00-18:00','ไม่เข้าร่วมงาน TFBO']" :key="o">
+                <div class="ci cb" v-for="o in ['ฉันอยู่ที่หน้างานแล้ว','10:00-12:00','12:00-14:00','14:00-16:00','16:00-18:00','ไม่เข้าร่วมงาน TFBO']" :key="o">
                   <input type="checkbox" v-model="form.tfboTime" :value="o" :id="'t'+o">
                   <label :for="'t'+o">{{ o }}</label>
                 </div>
@@ -553,8 +553,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
 
             <div class="foot-note">
-              หลังจากกรอกแบบฟอร์มเสร็จสิ้น จะต้องได้รับการติดต่อจากฝ่ายขายและผ่านขั้นตอนการให้คำปรึกษา เมื่อยืนยันความถูกต้องแล้ว จึงจะสามารถเข้าร่วม <strong>แผนการรับประกันรายได้</strong> อย่างเป็นทางการ<br><br>
-              * แบบสอบถามนี้ใช้สำหรับการวิเคราะห์ข้อมูลเบื้องต้นเท่านั้น ข้อมูลของคุณจะถูกเก็บเป็นความลับ
+              หลังจากกรอกแบบฟอร์มเสร็จสิ้น จะต้องได้รับการติดต่อจากฝ่ายขายและผ่านขั้นตอนการให้คำปรึกษา เมื่อยืนยันความถูกต้องแล้ว จึงจะสามารถเข้าร่วม<strong>แผนการรับประกันรายได้</strong>strong>หรือ<strong>กิจกรรมประมูลเริ่มต้น 1 บาท</strong>อย่างเป็นทางการ
             </div>
 
             <button class="submit-btn" type="submit" :disabled="isSubmitting || form.concerns.length===0 || form.tfboDate.length===0 || form.tfboTime.length===0">
