@@ -612,17 +612,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           concerns: con.join('、'), tfboDate: form.value.tfboDate.join('、'),
           tfboTime: form.value.tfboTime.join ? form.value.tfboTime.join('、') : form.value.tfboTime, activity: form.value.activity
         };
-        try {
-          await fetch(GAS_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
-          if (liff.isInClient()) {
-            var code = userId.value.slice(-4);
-            try {
-              await liff.sendMessages([{type:'text', text:'ฉันได้กรอกแบบฟอร์มกิจกรรม CleanChain 2026 TFBO เรียบร้อยแล้ว!\nหมายเลขสอบถามของฉันคือ：'+code}]);
-            } catch(e2) { alert("ส่งแบบฟอร์มสำเร็จ!"); }
-            liff.closeWindow();
-          } else { alert("ส่งแบบฟอร์มสำเร็จ!"); }
-        } catch(e) { alert("ส่งข้อมูลล้มเหลว โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ต"); }
-        finally { isSubmitting.value = false; }
+        
+try {
+  await fetch(GAS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+
+  if (liff.isInClient()) {
+    var code = userId.value.slice(-4);
+
+    const imageUrl = 'https://scontent.ftpe7-4.fna.fbcdn.net/v/t39.30808-6/688532668_1011542341546934_7623789243283805344_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=cXsjp1wg_iIQ7kNvwH3nx2J&_nc_oc=AdrhvhdhrIrILfNmit0QR5TGLX0V-3WbwIvpf_6debM38kaTwsWEiM20uwc3Iks5n_8&_nc_zt=23&_nc_ht=scontent.ftpe7-4.fna&_nc_gid=jHGyo5Z53gURijM0Y0zQog&_nc_ss=7b2a8&oh=00_Af-ADcuDpylII15DntHyvTXDPkNLYzCWCwxS4tSKxKGmew&oe=6A25A105';
+
+    try {
+      await liff.sendMessages([
+        {
+          type: 'text',
+          text: 'ฉันได้กรอกแบบฟอร์มกิจกรรม CleanChain 2026 TFBO เรียบร้อยแล้ว!\nหมายเลขสอบถามของฉันคือ：' + code
+        },
+        {
+          type: 'image',
+          originalContentUrl: imageUrl,
+          previewImageUrl: imageUrl
+        }
+      ]);
+    } catch (e2) {
+      alert("ส่งแบบฟอร์มสำเร็จ!");
+    }
+
+    liff.closeWindow();
+  } else {
+    alert("ส่งแบบฟอร์มสำเร็จ!");
+  }
+} catch (e) {
+  alert("ส่งข้อมูลล้มเหลว โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ต");
+} finally {
+  isSubmitting.value = false;
+}
       };
       return { isLoading, isSubmitting, form, submitForm };
     }
