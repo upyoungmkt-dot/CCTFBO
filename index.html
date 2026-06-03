@@ -13,7 +13,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <style>
-    /* （保留你原本的所有 CSS，完全未更動） */
     :root {
       --blue: #1a7fd4;
       --blue-dk: #0f5fa8;
@@ -39,40 +38,67 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       padding: 40px 20px 72px;
       text-align: center;
     }
-    .hblob { position: absolute; border-radius: 50%; pointer-events: none; }
+
+    /* decorative blobs */
+    .hblob {
+      position: absolute; border-radius: 50%; pointer-events: none;
+    }
     .hb1 { width:280px;height:280px; background:rgba(99,212,255,0.07); top:-100px;left:-80px; }
     .hb2 { width:180px;height:180px; background:rgba(255,255,255,0.04); top:10px;right:-40px; }
     .hb3 { width:120px;height:120px; background:rgba(99,212,255,0.06); bottom:50px;left:20px; }
 
+    /* ── Logo centered ── */
     .hero-logo {
-      width: 96px; border-radius: 20px; box-shadow: 0 6px 28px rgba(0,0,0,0.35);
-      display: block; margin: 0 auto 18px; position: relative; z-index: 2;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
-      color: rgba(255,255,255,0.88); font-size: 10px; font-weight: 700;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      padding: 5px 14px; border-radius: 50px; margin-bottom: 12px;
+      width: 96px;
+      border-radius: 20px;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.35);
+      display: block;
+      margin: 0 auto 18px;
       position: relative; z-index: 2;
     }
-    .hero-title {
-      font-size: 22px; font-weight: 700; color: #fff; line-height: 1.4;
-      position: relative; z-index: 2; margin-bottom: 4px;
-    }
-    .hero-title .sky { color: var(--sky); }
-    .hero-sub {
-      font-size: 11.5px; color: #1a4a7a; font-weight: 300; letter-spacing: 0.06em;
-      position: relative; z-index: 2; margin-bottom: 12px;
+
+    /* badge */
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.88);
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 50px;
+      margin-bottom: 12px;
+      position: relative; z-index: 2;
     }
 
-    /* ── Mascot ── */
+    .hero-title {
+      font-size: 22px; font-weight: 700;
+      color: #fff; line-height: 1.4;
+      position: relative; z-index: 2;
+      margin-bottom: 4px;
+    }
+    .hero-title .sky { color: var(--sky); }
+
+    .hero-sub {
+      font-size: 11.5px; color: #1a4a7a;
+      font-weight: 300; letter-spacing: 0.06em;
+      position: relative; z-index: 2;
+      margin-bottom: 12px;
+    }
+
+    /* ── Mascot centered at bottom ── */
     .mascot-stage {
-      display: flex; justify-content: center; align-items: flex-end;
-      margin-top: -60px; margin-bottom: -10px; position: relative; z-index: 5;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin-top: -60px;
+      margin-bottom: -10px;
+      position: relative;
+      z-index: 5;
     }
     .mascot-img {
-      width: 155px; height: 155px; object-fit: contain; display: block;
+      width: 155px; height: 155px;
+      object-fit: contain;
+      display: block;
       filter: drop-shadow(0 10px 28px rgba(26,127,212,0.45));
       animation: bobble 3.5s ease-in-out infinite;
     }
@@ -80,105 +106,152 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       0%,100% { transform: translateY(0) rotate(-2deg); }
       50%      { transform: translateY(-10px) rotate(2deg); }
     }
+
+    /* SVG animated bubbles near mascot */
     .bubbles-svg {
-      position: absolute; top: -30px; left: 50%; transform: translateX(-50%);
-      width: 160px; height: 60px; pointer-events: none;
+      position: absolute;
+      top: -30px; left: 50%; 
+      transform: translateX(-50%);
+      width: 160px; height: 60px;
+      pointer-events: none;
     }
+
+    /* wave */
     .hero-wave {
       position: absolute; bottom: 0; left: 0; right: 0;
       line-height: 0; z-index: 1;
     }
     .hero-wave svg { display: block; width: 100%; }
 
-    /* ═══ PAGE & CARD ═══ */
+    /* ═══ PAGE ═══ */
     .page {
-      padding: 0 12px 60px; margin-top: -28px; position: relative; z-index: 1;
+      padding: 0 12px 60px;
+      margin-top: -28px;
+      position: relative; z-index: 1;
     }
+
+    /* ═══ CARD ═══ */
     .card {
-      background: #fff; border-radius: 22px; max-width: 480px; margin: 0 auto;
-      box-shadow: 0 16px 48px rgba(10,60,120,0.14); overflow: hidden;
+      background: #fff;
+      border-radius: 22px;
+      max-width: 480px;
+      margin: 0 auto;
+      box-shadow: 0 16px 48px rgba(10,60,120,0.14);
+      overflow: hidden;
       animation: rise 0.5s cubic-bezier(0.22,1,0.36,1) both;
     }
     @keyframes rise {
       from { opacity:0; transform:translateY(24px); }
       to   { opacity:1; transform:translateY(0); }
     }
+
     .card-mascot-space { height: 66px; }
 
+    /* Info */
     .info-wrap {
       background: linear-gradient(140deg, #082d54 0%, #0f5fa8 100%);
       padding: 0 16px 20px;
     }
     .info-tile {
-      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 14px; padding: 16px 14px; margin-bottom: 10px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px; padding: 16px 14px;
+      margin-bottom: 10px;
     }
     .info-tile:last-child { margin-bottom: 0; }
     .info-tile-label {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--sky); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--sky); margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
     }
     .tile-icon { flex-shrink: 0; }
     .info-tile ol { list-style: none; padding: 0; counter-reset: s; }
     .info-tile li {
-      counter-increment: s; font-size: 12px; color: rgba(255,255,255,0.7);
-      line-height: 1.55; margin-bottom: 6px; padding-left: 22px; position: relative;
+      counter-increment: s;
+      font-size: 12px; color: rgba(255,255,255,0.7);
+      line-height: 1.55; margin-bottom: 6px;
+      padding-left: 22px; position: relative;
     }
     .info-tile li::before {
-      content: counter(s); position: absolute; left: 0; top: 2px;
-      width: 15px; height: 15px; background: rgba(99,212,255,0.2); color: var(--sky);
+      content: counter(s);
+      position: absolute; left: 0; top: 2px;
+      width: 15px; height: 15px;
+      background: rgba(99,212,255,0.2); color: var(--sky);
       border-radius: 50%; font-size: 8.5px; font-weight: 700;
       display: flex; align-items: center; justify-content: center;
     }
     .info-tile li:last-child { margin-bottom: 0; }
+
     .cc-divider {
-      height: 3px; background: linear-gradient(90deg, var(--sky), var(--blue), var(--sky)); opacity: 0.45;
+      height: 3px;
+      background: linear-gradient(90deg, var(--sky), var(--blue), var(--sky));
+      opacity: 0.45;
     }
 
     /* ═══ FORM ═══ */
     .form-wrap { padding: 26px 18px; }
+
     .sec-label {
-      font-size: 9.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--blue); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+      font-size: 9.5px; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
     }
     .sec-icon { display: flex; align-items: center; }
     .sec-label::after {
-      content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent);
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
     }
+
     .fg { margin-bottom: 20px; }
     .fl {
-      display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 8px;
+      display: block; font-size: 13px; font-weight: 600;
+      color: var(--text); margin-bottom: 8px;
     }
     .fl-note { font-weight: 400; color: var(--muted); font-size: 11.5px; }
+
     input[type="text"], input[type="tel"] {
-      width: 100%; padding: 13px 15px; border: 1.5px solid #c8e0f5; border-radius: 12px;
-      font-size: 14px; font-family: 'Prompt', sans-serif; background: var(--blue-pale); color: var(--text);
+      width: 100%; padding: 13px 15px;
+      border: 1.5px solid #c8e0f5; border-radius: 12px;
+      font-size: 14px; font-family: 'Prompt', sans-serif;
+      background: var(--blue-pale); color: var(--text);
       transition: all 0.25s;
     }
     input[type="text"]::placeholder, input[type="tel"]::placeholder { color: #9ab8d4; }
     input[type="text"]:focus, input[type="tel"]:focus {
-      outline: none; border-color: var(--blue); background: #fff; box-shadow: 0 0 0 3px rgba(26,127,212,0.1);
+      outline: none; border-color: var(--blue);
+      background: #fff; box-shadow: 0 0 0 3px rgba(26,127,212,0.1);
     }
+
     .choices { display: flex; flex-direction: column; gap: 6px; }
     .ci { position: relative; }
     .ci input[type="radio"], .ci input[type="checkbox"] {
       position: absolute; opacity: 0; width: 0; height: 0;
     }
     .ci label {
-      display: flex; align-items: center; gap: 11px; padding: 12px 14px;
-      border: 1.5px solid #c8e0f5; border-radius: 12px; background: var(--blue-pale); cursor: pointer;
-      font-size: 13px; color: #4a6a8a; transition: all 0.2s; user-select: none; line-height: 1.4;
+      display: flex; align-items: center; gap: 11px;
+      padding: 12px 14px;
+      border: 1.5px solid #c8e0f5; border-radius: 12px;
+      background: var(--blue-pale); cursor: pointer;
+      font-size: 13px; color: #4a6a8a;
+      transition: all 0.2s; user-select: none; line-height: 1.4;
     }
     .ci label::before {
-      content: ''; flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%;
-      border: 2px solid #a8c8e8; background: #fff; transition: all 0.2s;
+      content: ''; flex-shrink: 0;
+      width: 20px; height: 20px; border-radius: 50%;
+      border: 2px solid #a8c8e8; background: #fff;
+      transition: all 0.2s;
     }
     .ci.cb label::before { border-radius: 6px; }
     .ci input:checked + label {
-      border-color: var(--blue); background: rgba(26,127,212,0.07); color: var(--text); font-weight: 600;
+      border-color: var(--blue);
+      background: rgba(26,127,212,0.07);
+      color: var(--text); font-weight: 600;
     }
     .ci input:checked + label::before {
-      background: var(--blue); border-color: var(--blue); box-shadow: inset 0 0 0 3px #fff;
+      background: var(--blue); border-color: var(--blue);
+      box-shadow: inset 0 0 0 3px #fff;
     }
     .ci.cb input:checked + label::before {
       box-shadow: none;
@@ -186,25 +259,38 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       background-repeat: no-repeat; background-position: center; background-size: 60%;
     }
     .ci label:hover { border-color: rgba(26,127,212,0.4); background: rgba(26,127,212,0.04); }
+
     .other-in {
-      margin-top: 6px; border-style: dashed !important; border-color: var(--blue) !important;
+      margin-top: 6px;
+      border-style: dashed !important;
+      border-color: var(--blue) !important;
       background: rgba(26,127,212,0.04) !important;
     }
+
     .foot-note {
-      background: var(--blue-pale); border: 1px solid #c8e0f5; border-radius: 12px; padding: 14px 16px;
+      background: var(--blue-pale); border: 1px solid #c8e0f5;
+      border-radius: 12px; padding: 14px 16px;
       font-size: 11.5px; color: var(--muted); line-height: 1.8;
     }
     .foot-note strong { color: var(--text); }
+
     .submit-btn {
-      width: 100%; padding: 16px; background: linear-gradient(135deg, var(--blue-dk) 0%, var(--blue) 100%);
-      color: #fff; border: none; border-radius: 14px; font-size: 15px; font-weight: 700;
-      font-family: 'Prompt', sans-serif; cursor: pointer; margin-top: 22px;
-      position: relative; overflow: hidden; transition: all 0.3s;
-      box-shadow: 0 6px 20px rgba(26,127,212,0.32); display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 16px;
+      background: linear-gradient(135deg, var(--blue-dk) 0%, var(--blue) 100%);
+      color: #fff; border: none; border-radius: 14px;
+      font-size: 15px; font-weight: 700; font-family: 'Prompt', sans-serif;
+      cursor: pointer; margin-top: 22px;
+      position: relative; overflow: hidden;
+      transition: all 0.3s;
+      box-shadow: 0 6px 20px rgba(26,127,212,0.32);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
     }
     .submit-btn::after {
-      content: ''; position: absolute; top: -50%; left: -60%; width: 35%; height: 200%;
-      background: rgba(255,255,255,0.18); transform: rotate(20deg); transition: left 0.5s;
+      content: '';
+      position: absolute; top: -50%; left: -60%;
+      width: 35%; height: 200%;
+      background: rgba(255,255,255,0.18);
+      transform: rotate(20deg); transition: left 0.5s;
     }
     .submit-btn:hover:not(:disabled)::after { left: 120%; }
     .submit-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(26,127,212,0.42); }
@@ -212,14 +298,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     /* Loading */
     .loading-screen {
-      position: fixed; inset: 0; background: linear-gradient(160deg, var(--blue-dp), var(--blue));
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; z-index: 999;
+      position: fixed; inset: 0;
+      background: linear-gradient(160deg, var(--blue-dp), var(--blue));
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 16px;
+      z-index: 999;
     }
     .ld-logo { width: 110px; border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
     .ld-mascot { width: 90px; animation: bobble 2s ease-in-out infinite; }
     .ld-dots { display: flex; gap: 8px; }
     .ld-dots span {
-      width: 8px; height: 8px; background: rgba(99,212,255,0.85); border-radius: 50%;
+      width: 8px; height: 8px;
+      background: rgba(99,212,255,0.85); border-radius: 50%;
       animation: db 1.2s ease-in-out infinite;
     }
     .ld-dots span:nth-child(2) { animation-delay: 0.15s; }
@@ -234,143 +324,152 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NGLF446"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="app">
+
   <div v-if="isLoading" class="loading-screen">
-    <img class="ld-logo" src="https://via.placeholder.com/110?text=Logo" alt="Loading Logo">
-    <img class="ld-mascot" src="https://via.placeholder.com/90?text=Mascot" alt="Loading Mascot">
+    <img class="ld-logo" src="https://via.placeholder.com/110?text=LOGO" alt="Logo">
+    <img class="ld-mascot" src="https://via.placeholder.com/90?text=Mascot" alt="Mascot">
     <div class="ld-dots">
       <span></span><span></span><span></span>
     </div>
   </div>
 
-  <div v-show="!isLoading">
+  <div v-else>
+    
     <div class="hero">
       <div class="hblob hb1"></div>
       <div class="hblob hb2"></div>
       <div class="hblob hb3"></div>
       
-      <img class="hero-logo" src="https://via.placeholder.com/96?text=Logo" alt="Hero Logo">
+      <img class="hero-logo" src="https://via.placeholder.com/96?text=LOGO" alt="Hero Logo">
       
       <div class="hero-badge">CleanChain</div>
-      <h1 class="hero-title">2026 TFBO <span class="sky">กิจกรรม</span></h1>
-      <div class="hero-sub">แบบฟอร์มลงทะเบียน (Registration Form)</div>
+      <h1 class="hero-title">แบบฟอร์มกิจกรรม <span class="sky">CleanChain 2026</span> TFBO</h1>
+      <div class="hero-sub">กรุณากรอกข้อมูลเพื่อเข้าร่วมกิจกรรม</div>
       
       <div class="hero-wave">
-        <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#deeeff" fill-opacity="1" d="M0,256L48,229.3C96,203,192,149,288,154.7C384,160,480,224,576,218.7C672,213,768,139,864,128C960,117,1056,171,1152,197.3C1248,224,1344,224,1392,224L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,32L60,42.7C120,53,240,75,360,74.7C480,75,600,53,720,48C840,43,960,53,1080,58.7C1200,64,1320,64,1380,64L1440,64L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z" fill="#deeeff"/>
         </svg>
       </div>
     </div>
 
     <div class="mascot-stage">
-      <img class="mascot-img" src="https://via.placeholder.com/155?text=Mascot" alt="Mascot Stage">
+      <img class="mascot-img" src="https://via.placeholder.com/155?text=Mascot" alt="Mascot">
     </div>
 
     <div class="page">
       <div class="card">
         <div class="card-mascot-space"></div>
-        
+
         <div class="info-wrap">
           <div class="info-tile">
-            <div class="info-tile-label">รายละเอียด / Info</div>
+            <div class="info-tile-label">
+              <span class="tile-icon">📌</span> เงื่อนไขการเข้าร่วมกิจกรรม
+            </div>
             <ol>
-              <li>ข้อมูลที่ 1</li>
-              <li>ข้อมูลที่ 2</li>
+              <li>กรอกข้อมูลให้ครบถ้วนตามความจริง</li>
+              <li>ผู้เข้าร่วมต้องดาวน์โหลดแอปพลิเคชันก่อนเริ่มกิจกรรม</li>
+              <li>จำกัดสิทธิ์ 1 ท่าน ต่อ 1 สิทธิ์เท่านั้น</li>
             </ol>
           </div>
         </div>
-        
+
         <div class="cc-divider"></div>
-        
+
         <div class="form-wrap">
-          <div class="sec-label">กรอกข้อมูล / Fill Form</div>
-          
-          <div class="fg">
-            <label class="fl">ชื่อ-นามสกุล <span class="fl-note">(Name)</span></label>
-            <input type="text" placeholder="ระบุชื่อของคุณ" v-model="formData.name">
-          </div>
-          
-          <div class="fg">
-            <label class="fl">เบอร์โทรศัพท์ <span class="fl-note">(Phone)</span></label>
-            <input type="tel" placeholder="08X-XXX-XXXX" v-model="formData.phone">
+          <div class="sec-label">
+            <span class="sec-icon">📝</span> ข้อมูลผู้สมัครข้อมูล
           </div>
 
           <div class="fg">
-            <label class="fl">ตัวเลือก <span class="fl-note">(Options)</span></label>
+            <label class="fl">ชื่อ - นามสกุล <span class="fl-note">(Full Name)</span></label>
+            <input type="text" placeholder="ตัวอย่าง: สมชาย ใจดี" v-model="formData.name">
+          </div>
+
+          <div class="fg">
+            <label class="fl">เบอร์โทรศัพท์ <span class="fl-note">(Phone Number)</span></label>
+            <input type="tel" placeholder="ตัวอย่าง: 0812345678" v-model="formData.phone">
+          </div>
+
+          <div class="fg">
+            <label class="fl">คุณรู้จักเราผ่านช่องทางใด <span class="fl-note">(Channels)</span></label>
             <div class="choices">
-              <div class="ci cb">
-                <input type="checkbox" id="chk1" v-model="formData.options" value="option1">
-                <label for="chk1">ตัวเลือกที่ 1 (Option 1)</label>
+              <div class="ci">
+                <input type="radio" id="channel1" value="Facebook" v-model="formData.channel">
+                <label for="channel1">Facebook / Social Media</label>
               </div>
-              <div class="ci cb">
-                <input type="checkbox" id="chk2" v-model="formData.options" value="option2">
-                <label for="chk2">ตัวเลือกที่ 2 (Option 2)</label>
+              <div class="ci">
+                <input type="radio" id="channel2" value="Line" v-model="formData.channel">
+                <label for="channel2">LINE Official Account</label>
               </div>
+              <div class="ci">
+                <input type="radio" id="channel3" value="Other" v-model="formData.channel">
+                <label for="channel3">อื่นๆ (โปรดระบุ)</label>
+              </div>
+              <input v-if="formData.channel === 'Other'" type="text" class="other-in" placeholder="ระบุช่องทางอื่นๆ" v-model="formData.channelOther">
             </div>
           </div>
 
           <div class="foot-note">
-            <strong>หมายเหตุ:</strong> โปรดตรวจสอบข้อมูลให้ถูกต้องก่อนกดยืนยัน (Please verify before submitting)
+            <strong>หมายเหตุ:</strong> ทีมงานขอสงวนสิทธิ์ในการเปลี่ยนแปลงเงื่อนไขกิจกรรมโดยไม่ต้องแจ้งให้ทราบล่วงหน้า
           </div>
-          
+
           <button class="submit-btn" :disabled="isSubmitting" @click="submitForm">
-            {{ isSubmitting ? 'กำลังส่ง...' : 'ยืนยันข้อมูล (Submit)' }}
+            <span v-if="isSubmitting">กำลังบันทึกข้อมูล...</span>
+            <span v-else>ส่งฟอร์มลงทะเบียน (Submit)</span>
           </button>
         </div>
       </div>
     </div>
+
   </div>
 </div>
 
 <script>
-  const { createApp, ref, reactive, onMounted } = Vue;
-
-  createApp({
-    setup() {
-      const isLoading = ref(true);
-      const isSubmitting = ref(false);
-      
-      const formData = reactive({
-        name: '',
-        phone: '',
-        options: []
-      });
-
-      onMounted(async () => {
-        // 模擬載入時間，若你有正式的 liff.init() 可以寫在這裡
-        try {
-          /* 若需要使用 LIFF，取消此段註解並填入你的 LIFF ID
-          await liff.init({ liffId: "你的_LIFF_ID" });
-          if (!liff.isLoggedIn()) {
-             liff.login();
-          }
-          */
-          setTimeout(() => {
-            isLoading.value = false;
-          }, 1500); // 假裝載入 1.5 秒
-        } catch (err) {
-          console.error('Initialization failed', err);
-          isLoading.value = false;
+  Vue.createApp({
+    // 資料狀態
+    data() {
+      return {
+        isLoading: true,       // 載入畫面狀態開關
+        isSubmitting: false,    // 按紐防連點狀態開關
+        formData: {             // 表單綁定欄位
+          name: '',
+          phone: '',
+          channel: '',
+          channelOther: ''
         }
-      });
+      }
+    },
+    // 網頁節點掛載完成後執行
+    mounted() {
+      // 這裡可以插入 LINE LIFF 的初始化邏輯
+      // liff.init({ liffId: "YOUR_LIFF_ID" }).then(() => { ... })
+      
+      // 模擬專案載入，預設 2 秒後關閉 Loading 畫面
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 2000);
+    },
+    // 方法定義
+    methods: {
+      submitForm() {
+        // 簡易前端防呆
+        if (!this.formData.name || !this.formData.phone) {
+          alert('กรุณากรอกข้อมูลให้ครบถ้วน (Please fill in all fields)');
+          return;
+        }
 
-      const submitForm = () => {
-        isSubmitting.value = true;
-        // 模擬送出表單
+        this.isSubmitting = true;
+
+        // 模擬 AJAX 發送請求
         setTimeout(() => {
-          alert('送出成功！\n' + JSON.stringify(formData, null, 2));
-          isSubmitting.value = false;
-        }, 1000);
-      };
-
-      return { 
-        isLoading, 
-        isSubmitting,
-        formData,
-        submitForm
-      };
+          alert('ลงทะเบียนสำเร็จ! (Registration Success)');
+          console.log('Submitted Data:', this.formData);
+          this.isSubmitting = false;
+        }, 1500);
+      }
     }
-  }).mount('#app');
+  }).mount('#app'); // 將 Vue 實體綁定至畫面的 #app 節點
 </script>
-
 </body>
 </html>
