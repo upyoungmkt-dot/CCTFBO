@@ -524,24 +524,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               แผนการเข้าร่วม TFBO
             </div>
 
-            <div class="fg">
-              <label class="fl">วางแผนเข้าร่วมงาน TFBO วันใด? <span class="fl-note">(เลือกได้มากกว่า 1 ข้อ)</span></label>
-              <div class="choices">
-                <div class="ci cb" v-for="o in ['4 มิ.ย. 69','5 มิ.ย. 69','6 มิ.ย. 69','7 มิ.ย. 69','ไม่เข้าร่วมงาน TFBO']" :key="o">
-                  <input type="checkbox" v-model="form.tfboDate" :value="o" :id="'d'+o">
-                  <label :for="'d'+o">{{ o }}</label>
-                </div>
-              </div>
-            </div>
-            <div class="fg">
-              <label class="fl">วางแผนมาที่บูธ G4 เวลาใด? <span class="fl-note">(เลือกได้มากกว่า 1 ช่วงเวลา)</span></label>
-              <div class="choices">
-                <div class="ci cb" v-for="o in ['10:00-12:00','12:00-14:00','14:00-16:00','16:00-18:00','ไม่เข้าร่วมงาน TFBO']" :key="o">
-                  <input type="checkbox" v-model="form.tfboTime" :value="o" :id="'t'+o">
-                  <label :for="'t'+o">{{ o }}</label>
-                </div>
-              </div>
-            </div>
+           
             <div class="fg">
               <label class="fl">ต้องการเข้าร่วมกิจกรรมใด?</label>
               <div class="choices">
