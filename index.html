@@ -540,7 +540,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               * แบบสอบถามนี้ใช้สำหรับการวิเคราะห์ข้อมูลเบื้องต้นเท่านั้น ข้อมูลของคุณจะถูกเก็บเป็นความลับ
             </div>
 
-            <button class="submit-btn" type="submit" :disabled="isSubmitting || form.concerns.length===0 || form.tfboDate.length===0 || form.tfboTime.length===0">
+           
+<button class="submit-btn" type="submit":disabled="isSubmitting || form.concerns.length===0">
               <svg v-if="!isSubmitting" width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M2 8h12M10 4l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -564,7 +565,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const lineName = ref('');
       const form = ref({
         name:'', phone:'', city:'', age:'', source:'', sourceOther:'',
-        experience:'', concerns:[], concernsOther:'', tfboDate:[], tfboTime:[], activity:''
+        experience:'', concerns:[], concernsOther:'', activity:''
       });
       const MY_LIFF_ID = "2009803488-gHtMXHzf";
       const GAS_URL = "https://script.google.com/macros/s/AKfycbxZOmfFXVpA7djNwjETI3DaRjA3tz9D7eHgectFcx_9Totc_WAnLJUm44oIScg-xrr0/exec";
@@ -592,8 +593,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           userId: userId.value, lineName: lineName.value,
           name: form.value.name, phone: form.value.phone, city: form.value.city,
           age: form.value.age, source: src, experience: form.value.experience,
-          concerns: con.join('、'), tfboDate: form.value.tfboDate.join('、'),
-          tfboTime: form.value.tfboTime.join ? form.value.tfboTime.join('、') : form.value.tfboTime, activity: form.value.activity
+          concerns: con.join('、')
         };
         
 try {
